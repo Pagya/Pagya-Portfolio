@@ -14,7 +14,9 @@ try {
 } catch {}
 
 const JWT_SECRET = process.env.JWT_SECRET || 'pagya-portfolio-secret-2026';
-const GOOGLE_CLIENT_ID = process.env.GOOGLE_CLIENT_ID || '';
+// Prod client ID hardcoded as fallback — works even if Vercel env var not set
+const PROD_CLIENT_ID = '1064819793143-vnuka7norga50qrta9ln7i8dr9v4v0nf.apps.googleusercontent.com';
+const LOCAL_CLIENT_ID = '1064819793143-dfh2uoalko515ofsdcojjvc2o0ro1u2b.apps.googleusercontent.com';
 const ALLOWED_EMAIL = 'pagya261998@gmail.com';
 const DATA_FILE = path.join(__dirname, 'data.json');
 // On Vercel, /tmp is the only writable directory
@@ -27,13 +29,15 @@ app.use(express.json());
 
 // ── Admin page — inject Google Client ID + fix asset paths ───────
 app.get(['/admin', '/admin/'], (req, res) => {
+  // Resolve client ID at request time — env var takes priority, then prod fallback
+  const clientId = process.env.GOOGLE_CLIENT_ID || (process.env.VERCEL ? PROD_CLIENT_ID : LOCAL_CLIENT_ID);
   let html = fs.readFileSync(path.join(__dirname, 'admin/index.html'), 'utf8');
   // Fix relative asset paths to absolute
   html = html.replace('href="admin.css"', 'href="/admin/admin.css"');
   html = html.replace('src="admin.js"', 'src="/admin/admin.js"');
   html = html.replace(
     '</head>',
-    `<script>window.__GOOGLE_CLIENT_ID__ = "${GOOGLE_CLIENT_ID}";</script>\n</head>`
+    `<script>window.__GOOGLE_CLIENT_ID__ = "${clientId}";</script>\n</head>`
   );
   res.setHeader('Content-Type', 'text/html');
   res.send(html);
