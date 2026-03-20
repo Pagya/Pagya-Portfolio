@@ -4,7 +4,7 @@ const path = require('path');
 const jwt = require('jsonwebtoken');
 const https = require('https');
 
-// Load .env manually (no extra dependency)
+// Load .env manually when running locally
 try {
   const env = fs.readFileSync(path.join(__dirname, '.env'), 'utf8');
   env.split('\n').forEach(line => {
@@ -13,29 +13,36 @@ try {
   });
 } catch {}
 
-const app = express();
-const PORT = 3000;
 const JWT_SECRET = process.env.JWT_SECRET || 'pagya-portfolio-secret-2026';
-const GOOGLE_CLIENT_ID = process.env.GOOGLE_CLIENT_ID || 'YOUR_GOOGLE_CLIENT_ID';
+const GOOGLE_CLIENT_ID = process.env.GOOGLE_CLIENT_ID || '';
 const ALLOWED_EMAIL = 'pagya261998@gmail.com';
 const DATA_FILE = path.join(__dirname, 'data.json');
 const DRAFT_FILE = path.join(__dirname, 'draft.json');
 
+const app = express();
 app.use(express.json());
 app.use(express.static(__dirname));
 
-// ── Verify Google ID token by calling Google's tokeninfo endpoint ─
+// ── Helpers ──────────────────────────────────────────────────────
+const readJSON = (file) => JSON.parse(fs.readFileSync(file, 'utf8'));
+const writeJSON = (file, data) => fs.writeFileSync(file, JSON.stringify(data, null, 2));
+
+// Ensure draft.json exists
+if (!fs.existsSync(DRAFT_FILE)) {
+  fs.copyFileSync(DATA_FILE, DRAFT_FILE);
+}
+
+// ── Google token verification ────────────────────────────────────
 function verifyGoogleToken(idToken) {
   return new Promise((resolve, reject) => {
-    const url = `https://oauth2.googleapis.com/tokeninfo?id_token=${idToken}`;
-    https.get(url, (res) => {
+    https.get(`https://oauth2.googleapis.com/tokeninfo?id_token=${idToken}`, (res) => {
       let data = '';
-      res.on('data', chunk => data += chunk);
+      res.on('data', c => data += c);
       res.on('end', () => {
         try {
-          const payload = JSON.parse(data);
-          if (payload.error) return reject(new Error(payload.error));
-          resolve(payload);
+          const p = JSON.parse(data);
+          if (p.error) return reject(new Error(p.error));
+          resolve(p);
         } catch { reject(new Error('Failed to parse Google response')); }
       });
     }).on('error', reject);
@@ -54,11 +61,7 @@ function requireAuth(req, res, next) {
   }
 }
 
-// ── Helpers ──────────────────────────────────────────────────────
-const readJSON = (file) => JSON.parse(fs.readFileSync(file, 'utf8'));
-const writeJSON = (file, data) => fs.writeFileSync(file, JSON.stringify(data, null, 2));
-
-// ── Google SSO login ─────────────────────────────────────────────
+// ── Google SSO ───────────────────────────────────────────────────
 app.post('/api/auth/google', async (req, res) => {
   const { credential } = req.body;
   if (!credential) return res.status(400).json({ error: 'Missing credential' });
@@ -74,27 +77,24 @@ app.post('/api/auth/google', async (req, res) => {
   }
 });
 
-// ── Serve admin page with Google Client ID injected ─────────────
+// ── Admin page — inject Google Client ID ─────────────────────────
 app.get('/admin/', (req, res) => {
   let html = fs.readFileSync(path.join(__dirname, 'admin/index.html'), 'utf8');
   html = html.replace(
     '</head>',
     `<script>window.__GOOGLE_CLIENT_ID__ = "${GOOGLE_CLIENT_ID}";</script>\n</head>`
   );
+  res.setHeader('Content-Type', 'text/html');
   res.send(html);
 });
 
-// ── Public: read published data ──────────────────────────────────
-app.get('/api/data', (req, res) => {
-  res.json(readJSON(DATA_FILE));
-});
+// ── Public data ──────────────────────────────────────────────────
+app.get('/api/data', (req, res) => res.json(readJSON(DATA_FILE)));
 
-// ── Admin: read draft ────────────────────────────────────────────
-app.get('/api/draft', requireAuth, (req, res) => {
-  res.json(readJSON(DRAFT_FILE));
-});
+// ── Draft: read ──────────────────────────────────────────────────
+app.get('/api/draft', requireAuth, (req, res) => res.json(readJSON(DRAFT_FILE)));
 
-// ── Admin: update a section in draft ────────────────────────────
+// ── Draft: update section ────────────────────────────────────────
 app.put('/api/draft/:section', requireAuth, (req, res) => {
   const { section } = req.params;
   const draft = readJSON(DRAFT_FILE);
@@ -104,22 +104,22 @@ app.put('/api/draft/:section', requireAuth, (req, res) => {
   res.json({ success: true, section, data: draft[section] });
 });
 
-// ── Admin: add item to an array section ─────────────────────────
+// ── Draft: add item to array section ────────────────────────────
 app.post('/api/draft/:section', requireAuth, (req, res) => {
   const { section } = req.params;
   const draft = readJSON(DRAFT_FILE);
-  if (!Array.isArray(draft[section])) return res.status(400).json({ error: 'Section is not an array' });
+  if (!Array.isArray(draft[section])) return res.status(400).json({ error: 'Not an array section' });
   const newItem = { ...req.body, id: `${section}_${Date.now()}` };
   draft[section].push(newItem);
   writeJSON(DRAFT_FILE, draft);
   res.json({ success: true, item: newItem });
 });
 
-// ── Admin: update single item in array section ───────────────────
+// ── Draft: update single array item ─────────────────────────────
 app.put('/api/draft/:section/:id', requireAuth, (req, res) => {
   const { section, id } = req.params;
   const draft = readJSON(DRAFT_FILE);
-  if (!Array.isArray(draft[section])) return res.status(400).json({ error: 'Section is not an array' });
+  if (!Array.isArray(draft[section])) return res.status(400).json({ error: 'Not an array section' });
   const idx = draft[section].findIndex(i => i.id === id);
   if (idx === -1) return res.status(404).json({ error: 'Item not found' });
   draft[section][idx] = { ...req.body, id };
@@ -127,37 +127,36 @@ app.put('/api/draft/:section/:id', requireAuth, (req, res) => {
   res.json({ success: true, item: draft[section][idx] });
 });
 
-// ── Admin: delete item from array section ───────────────────────
+// ── Draft: delete array item ─────────────────────────────────────
 app.delete('/api/draft/:section/:id', requireAuth, (req, res) => {
   const { section, id } = req.params;
   const draft = readJSON(DRAFT_FILE);
-  if (!Array.isArray(draft[section])) return res.status(400).json({ error: 'Section is not an array' });
-  const before = draft[section].length;
+  if (!Array.isArray(draft[section])) return res.status(400).json({ error: 'Not an array section' });
   draft[section] = draft[section].filter(i => i.id !== id);
-  if (draft[section].length === before) return res.status(404).json({ error: 'Item not found' });
   writeJSON(DRAFT_FILE, draft);
   res.json({ success: true });
 });
 
-// ── Admin: publish draft → live ──────────────────────────────────
+// ── Publish draft → live ─────────────────────────────────────────
 app.post('/api/publish', requireAuth, (req, res) => {
-  const draft = readJSON(DRAFT_FILE);
-  writeJSON(DATA_FILE, draft);
-  res.json({ success: true, message: 'Draft published to live portfolio.' });
+  writeJSON(DATA_FILE, readJSON(DRAFT_FILE));
+  res.json({ success: true, message: 'Published to live.' });
 });
 
-// ── Admin: reset draft to current live ──────────────────────────
+// ── Reset draft to live ──────────────────────────────────────────
 app.post('/api/draft/reset', requireAuth, (req, res) => {
-  const live = readJSON(DATA_FILE);
-  writeJSON(DRAFT_FILE, live);
-  res.json({ success: true, message: 'Draft reset to current live content.' });
+  writeJSON(DRAFT_FILE, readJSON(DATA_FILE));
+  res.json({ success: true });
 });
 
-app.listen(PORT, () => {
-  console.log(`\n✅ Portfolio running at: http://localhost:${PORT}`);
-  console.log(`🔐 Admin panel at:       http://localhost:${PORT}/admin/`);
-  console.log(`   Google SSO — only ${ALLOWED_EMAIL} can access\n`);
-  if (GOOGLE_CLIENT_ID === 'YOUR_GOOGLE_CLIENT_ID') {
-    console.warn('⚠️  Set GOOGLE_CLIENT_ID in .env or as environment variable!\n');
-  }
-});
+// ── Local dev server ─────────────────────────────────────────────
+if (require.main === module) {
+  const PORT = process.env.PORT || 3000;
+  app.listen(PORT, () => {
+    console.log(`\n✅ Portfolio: http://localhost:${PORT}`);
+    console.log(`🔐 Admin:     http://localhost:${PORT}/admin/`);
+    if (!GOOGLE_CLIENT_ID) console.warn('⚠️  Set GOOGLE_CLIENT_ID in .env\n');
+  });
+}
+
+module.exports = app;
