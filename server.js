@@ -17,7 +17,10 @@ const JWT_SECRET = process.env.JWT_SECRET || 'pagya-portfolio-secret-2026';
 const GOOGLE_CLIENT_ID = process.env.GOOGLE_CLIENT_ID || '';
 const ALLOWED_EMAIL = 'pagya261998@gmail.com';
 const DATA_FILE = path.join(__dirname, 'data.json');
-const DRAFT_FILE = path.join(__dirname, 'draft.json');
+// On Vercel, /tmp is the only writable directory
+const DRAFT_FILE = process.env.VERCEL
+  ? '/tmp/draft.json'
+  : path.join(__dirname, 'draft.json');
 
 const app = express();
 app.use(express.json());
