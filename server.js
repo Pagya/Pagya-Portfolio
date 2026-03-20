@@ -1,24 +1,46 @@
 const express = require('express');
 const fs = require('fs');
 const path = require('path');
-const bcrypt = require('bcryptjs');
 const jwt = require('jsonwebtoken');
+const https = require('https');
+
+// Load .env manually (no extra dependency)
+try {
+  const env = fs.readFileSync(path.join(__dirname, '.env'), 'utf8');
+  env.split('\n').forEach(line => {
+    const [k, ...v] = line.split('=');
+    if (k && v.length) process.env[k.trim()] = v.join('=').trim();
+  });
+} catch {}
 
 const app = express();
 const PORT = 3000;
 const JWT_SECRET = process.env.JWT_SECRET || 'pagya-portfolio-secret-2026';
+const GOOGLE_CLIENT_ID = process.env.GOOGLE_CLIENT_ID || 'YOUR_GOOGLE_CLIENT_ID';
+const ALLOWED_EMAIL = 'pagya261998@gmail.com';
 const DATA_FILE = path.join(__dirname, 'data.json');
 const DRAFT_FILE = path.join(__dirname, 'draft.json');
 
-// Admin credentials (hashed password for "admin123" — change this)
-const ADMIN = {
-  username: 'admin',
-  // To change password: node -e "const b=require('bcryptjs');console.log(b.hashSync('yourpassword',10))"
-  passwordHash: bcrypt.hashSync('admin123', 10)
-};
-
 app.use(express.json());
-app.use(express.static(__dirname)); // serve portfolio files
+app.use(express.static(__dirname));
+
+// ── Verify Google ID token by calling Google's tokeninfo endpoint ─
+function verifyGoogleToken(idToken) {
+  return new Promise((resolve, reject) => {
+    const url = `https://oauth2.googleapis.com/tokeninfo?id_token=${idToken}`;
+    https.get(url, (res) => {
+      let data = '';
+      res.on('data', chunk => data += chunk);
+      res.on('end', () => {
+        try {
+          const payload = JSON.parse(data);
+          if (payload.error) return reject(new Error(payload.error));
+          resolve(payload);
+        } catch { reject(new Error('Failed to parse Google response')); }
+      });
+    }).on('error', reject);
+  });
+}
 
 // ── Auth middleware ──────────────────────────────────────────────
 function requireAuth(req, res, next) {
@@ -36,14 +58,30 @@ function requireAuth(req, res, next) {
 const readJSON = (file) => JSON.parse(fs.readFileSync(file, 'utf8'));
 const writeJSON = (file, data) => fs.writeFileSync(file, JSON.stringify(data, null, 2));
 
-// ── Auth routes ──────────────────────────────────────────────────
-app.post('/api/login', (req, res) => {
-  const { username, password } = req.body;
-  if (username !== ADMIN.username || !bcrypt.compareSync(password, ADMIN.passwordHash)) {
-    return res.status(401).json({ error: 'Invalid credentials' });
+// ── Google SSO login ─────────────────────────────────────────────
+app.post('/api/auth/google', async (req, res) => {
+  const { credential } = req.body;
+  if (!credential) return res.status(400).json({ error: 'Missing credential' });
+  try {
+    const payload = await verifyGoogleToken(credential);
+    if (payload.email !== ALLOWED_EMAIL) {
+      return res.status(403).json({ error: 'Access denied. This admin is restricted to a specific account.' });
+    }
+    const token = jwt.sign({ email: payload.email, name: payload.name }, JWT_SECRET, { expiresIn: '8h' });
+    res.json({ token, name: payload.name, email: payload.email });
+  } catch (err) {
+    res.status(401).json({ error: 'Google authentication failed: ' + err.message });
   }
-  const token = jwt.sign({ username }, JWT_SECRET, { expiresIn: '8h' });
-  res.json({ token });
+});
+
+// ── Serve admin page with Google Client ID injected ─────────────
+app.get('/admin/', (req, res) => {
+  let html = fs.readFileSync(path.join(__dirname, 'admin/index.html'), 'utf8');
+  html = html.replace(
+    '</head>',
+    `<script>window.__GOOGLE_CLIENT_ID__ = "${GOOGLE_CLIENT_ID}";</script>\n</head>`
+  );
+  res.send(html);
 });
 
 // ── Public: read published data ──────────────────────────────────
@@ -118,5 +156,8 @@ app.post('/api/draft/reset', requireAuth, (req, res) => {
 app.listen(PORT, () => {
   console.log(`\n✅ Portfolio running at: http://localhost:${PORT}`);
   console.log(`🔐 Admin panel at:       http://localhost:${PORT}/admin/`);
-  console.log(`   Username: admin  |  Password: admin123\n`);
+  console.log(`   Google SSO — only ${ALLOWED_EMAIL} can access\n`);
+  if (GOOGLE_CLIENT_ID === 'YOUR_GOOGLE_CLIENT_ID') {
+    console.warn('⚠️  Set GOOGLE_CLIENT_ID in .env or as environment variable!\n');
+  }
 });

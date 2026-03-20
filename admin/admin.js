@@ -15,27 +15,47 @@ const modalOverlay = document.getElementById('modalOverlay');
 /* ── Init ── */
 if (token) showDashboard();
 
-/* ── Login ── */
-document.getElementById('loginForm').addEventListener('submit', async (e) => {
-  e.preventDefault();
+/* ── Google SSO — initialise button once GSI script loads ── */
+window.addEventListener('load', () => {
+  if (token) return; // already logged in
+  const clientId = window.__GOOGLE_CLIENT_ID__ || '';
+  if (!clientId || clientId === 'YOUR_GOOGLE_CLIENT_ID') {
+    document.getElementById('loginError').textContent =
+      'Google Client ID not configured. See setup instructions.';
+    return;
+  }
+  google.accounts.id.initialize({
+    client_id: clientId,
+    callback: handleGoogleCredential,
+    auto_select: false
+  });
+  google.accounts.id.renderButton(
+    document.getElementById('googleBtn'),
+    { theme: 'outline', size: 'large', width: 280, text: 'signin_with', shape: 'rectangular' }
+  );
+});
+
+async function handleGoogleCredential(response) {
   const err = document.getElementById('loginError');
   err.textContent = '';
   try {
-    const res = await api('/api/login', 'POST', {
-      username: document.getElementById('loginUser').value,
-      password: document.getElementById('loginPass').value
-    }, false);
+    const res = await api('/api/auth/google', 'POST', { credential: response.credential }, false);
     token = res.token;
     localStorage.setItem('admin_token', token);
+    localStorage.setItem('admin_user', JSON.stringify({ name: res.name, email: res.email }));
     showDashboard();
   } catch (ex) {
-    err.textContent = ex.message || 'Invalid credentials';
+    err.textContent = ex.message || 'Sign-in failed. Make sure you are using the authorised account.';
   }
-});
+}
 
 document.getElementById('logoutBtn').addEventListener('click', () => {
-  token = null; localStorage.removeItem('admin_token');
-  dashboard.classList.add('hidden'); loginScreen.classList.remove('hidden');
+  token = null;
+  localStorage.removeItem('admin_token');
+  localStorage.removeItem('admin_user');
+  if (window.google) google.accounts.id.disableAutoSelect();
+  dashboard.classList.add('hidden');
+  loginScreen.classList.remove('hidden');
 });
 
 /* ── Nav ── */
@@ -75,11 +95,17 @@ document.getElementById('resetBtn').addEventListener('click', () => {
 async function showDashboard() {
   loginScreen.classList.add('hidden');
   dashboard.classList.remove('hidden');
+  // Show user badge
+  const user = JSON.parse(localStorage.getItem('admin_user') || '{}');
+  const badge = document.getElementById('userBadge');
+  if (badge && user.email) {
+    badge.innerHTML = `<span class="user-badge__avatar">${user.name ? user.name[0].toUpperCase() : 'P'}</span><div><p class="user-badge__name">${user.name || 'Pagya'}</p><p class="user-badge__email">${user.email}</p></div>`;
+  }
   try {
     draft = await api('/api/draft');
     renderSection(currentSection);
   } catch {
-    showToast('Session expired. Please log in again.', 'error');
+    showToast('Session expired. Please sign in again.', 'error');
     token = null; localStorage.removeItem('admin_token');
     loginScreen.classList.remove('hidden'); dashboard.classList.add('hidden');
   }

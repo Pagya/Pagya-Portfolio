@@ -7,6 +7,8 @@
   <link rel="preconnect" href="https://fonts.googleapis.com" />
   <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet" />
   <link rel="stylesheet" href="admin.css" />
+  <!-- Google Identity Services -->
+  <script src="https://accounts.google.com/gsi/client" async defer></script>
 </head>
 <body>
 
@@ -15,19 +17,10 @@
     <div class="login-card">
       <div class="login-logo">OP</div>
       <h1 class="login-title">Portfolio Admin</h1>
-      <p class="login-sub">Sign in to manage your portfolio content</p>
-      <form id="loginForm">
-        <div class="field">
-          <label>Username</label>
-          <input type="text" id="loginUser" value="admin" required />
-        </div>
-        <div class="field">
-          <label>Password</label>
-          <input type="password" id="loginPass" placeholder="••••••••" required />
-        </div>
-        <p class="login-error" id="loginError"></p>
-        <button type="submit" class="btn btn--primary btn--full">Sign In</button>
-      </form>
+      <p class="login-sub">Sign in with your Google account to manage portfolio content</p>
+      <div id="googleBtn"></div>
+      <p class="login-error" id="loginError"></p>
+      <p class="login-hint">Access is restricted to the authorised account only.</p>
     </div>
   </div>
 
@@ -45,6 +38,7 @@
         <a href="#" class="nav-item" data-section="contact">✉️ Contact</a>
       </nav>
       <div class="sidebar__actions">
+        <div class="user-badge" id="userBadge"></div>
         <button class="btn btn--publish" id="publishBtn">🚀 Publish to Live</button>
         <button class="btn btn--reset" id="resetBtn">↩️ Reset Draft</button>
         <a href="/" target="_blank" class="btn btn--ghost">👁 View Live Site</a>
