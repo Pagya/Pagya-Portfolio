@@ -4,12 +4,18 @@ const path = require('path');
 const jwt = require('jsonwebtoken');
 const https = require('https');
 
-// Load .env manually when running locally
+// Load .env manually ONLY for local dev — never overwrite existing env vars
 try {
   const env = fs.readFileSync(path.join(__dirname, '.env'), 'utf8');
   env.split('\n').forEach(line => {
-    const [k, ...v] = line.split('=');
-    if (k && v.length) process.env[k.trim()] = v.join('=').trim();
+    const trimmed = line.trim();
+    if (!trimmed || trimmed.startsWith('#')) return;
+    const eqIdx = trimmed.indexOf('=');
+    if (eqIdx === -1) return;
+    const k = trimmed.slice(0, eqIdx).trim();
+    const v = trimmed.slice(eqIdx + 1).trim();
+    // Only set if not already defined (Vercel env vars take priority)
+    if (k && !process.env[k]) process.env[k] = v;
   });
 } catch {}
 

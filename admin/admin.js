@@ -16,14 +16,25 @@ const modalOverlay = document.getElementById('modalOverlay');
 if (token) showDashboard();
 
 /* ── Google SSO — initialise button once GSI script loads ── */
+// Client IDs are public-facing (not secrets) — safe to hardcode
+const CLIENT_IDS = {
+  prod: '1064819793143-vnuka7norga50qrta9ln7i8dr9v4v0nf.apps.googleusercontent.com',
+  local: '1064819793143-dfh2uoalko515ofsdcojjvc2o0ro1u2b.apps.googleusercontent.com'
+};
+
+function getClientId() {
+  // Server-injected value takes priority if present and valid
+  const injected = window.__GOOGLE_CLIENT_ID__;
+  if (injected && injected.includes('.apps.googleusercontent.com')) return injected;
+  // Fall back to hostname-based selection
+  const host = window.location.hostname;
+  if (host === 'localhost' || host === '127.0.0.1') return CLIENT_IDS.local;
+  return CLIENT_IDS.prod;
+}
+
 window.addEventListener('load', () => {
   if (token) return; // already logged in
-  const clientId = window.__GOOGLE_CLIENT_ID__ || '';
-  if (!clientId || clientId === 'YOUR_GOOGLE_CLIENT_ID') {
-    document.getElementById('loginError').textContent =
-      'Google Client ID not configured. See setup instructions.';
-    return;
-  }
+  const clientId = getClientId();
   google.accounts.id.initialize({
     client_id: clientId,
     callback: handleGoogleCredential,
