@@ -21,7 +21,22 @@ const DRAFT_FILE = path.join(__dirname, 'draft.json');
 
 const app = express();
 app.use(express.json());
-app.use(express.static(__dirname));
+
+// ── Admin page — inject Google Client ID (must be BEFORE static) ─
+app.get(['/admin', '/admin/'], (req, res) => {
+  let html = fs.readFileSync(path.join(__dirname, 'admin/index.html'), 'utf8');
+  html = html.replace(
+    '</head>',
+    `<script>window.__GOOGLE_CLIENT_ID__ = "${GOOGLE_CLIENT_ID}";</script>\n</head>`
+  );
+  res.setHeader('Content-Type', 'text/html');
+  res.send(html);
+});
+
+// Serve all other static files (admin/admin.css, admin/admin.js, etc.)
+app.use(express.static(__dirname, { index: false }));
+// Serve index.html at root explicitly
+app.get('/', (req, res) => res.sendFile(path.join(__dirname, 'index.html')));
 
 // ── Helpers ──────────────────────────────────────────────────────
 const readJSON = (file) => JSON.parse(fs.readFileSync(file, 'utf8'));
