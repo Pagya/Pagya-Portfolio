@@ -208,8 +208,8 @@ function renderAchievementItem(item) {
     <div class="editor-card__header">
       <span class="editor-card__title">${esc(item.title || 'New Achievement')}</span>
       <div class="editor-card__actions">
-        <button class="btn btn--icon btn--edit save-item-btn">Save</button>
-        <button class="btn btn--icon btn--del del-item-btn">Delete</button>
+        <button class="btn btn--sm btn--icon-save save-item-btn">Save</button>
+        <button class="btn btn--sm btn--icon-del del-item-btn">Delete</button>
       </div>
     </div>
     <div class="fields-grid">
@@ -227,20 +227,20 @@ function renderCaseStudyItem(item) {
     <div class="step-item" data-step="${i}">
       <input class="step-title" value="${esc(s.title)}" placeholder="Step title" />
       <input class="step-desc" value="${esc(s.desc)}" placeholder="Step description" />
-      <button class="btn btn--icon btn--del remove-step" data-i="${i}" style="flex-shrink:0">✕</button>
+      <button class="btn btn--sm btn--icon-del remove-step" data-i="${i}" style="flex-shrink:0">✕</button>
     </div>`).join('');
   const impactHtml = (item.impact || []).map((m, i) => `
     <div class="step-item" data-imp="${i}">
       <input class="imp-value" value="${esc(m.value)}" placeholder="Value" style="max-width:120px" />
       <input class="imp-label" value="${esc(m.label)}" placeholder="Label" />
-      <button class="btn btn--icon btn--del remove-impact" data-i="${i}" style="flex-shrink:0">✕</button>
+      <button class="btn btn--sm btn--icon-del remove-impact" data-i="${i}" style="flex-shrink:0">✕</button>
     </div>`).join('');
   return `
     <div class="editor-card__header">
       <span class="editor-card__title">${esc(item.title || 'New Case Study')}</span>
       <div class="editor-card__actions">
-        <button class="btn btn--icon btn--edit save-item-btn">Save</button>
-        <button class="btn btn--icon btn--del del-item-btn">Delete</button>
+        <button class="btn btn--sm btn--icon-save save-item-btn">Save</button>
+        <button class="btn btn--sm btn--icon-del del-item-btn">Delete</button>
       </div>
     </div>
     <div class="fields-grid">
@@ -271,14 +271,14 @@ function renderExperienceItem(item) {
   const outcomesHtml = (item.outcomes || []).map((o, i) => `
     <div class="step-item" data-out="${i}">
       <input class="outcome-text" value="${esc(o)}" placeholder="Outcome" />
-      <button class="btn btn--icon btn--del remove-outcome" data-i="${i}" style="flex-shrink:0">✕</button>
+      <button class="btn btn--sm btn--icon-del remove-outcome" data-i="${i}" style="flex-shrink:0">✕</button>
     </div>`).join('');
   return `
     <div class="editor-card__header">
       <span class="editor-card__title">${esc(item.role || 'New Role')}</span>
       <div class="editor-card__actions">
-        <button class="btn btn--icon btn--edit save-item-btn">Save</button>
-        <button class="btn btn--icon btn--del del-item-btn">Delete</button>
+        <button class="btn btn--sm btn--icon-save save-item-btn">Save</button>
+        <button class="btn btn--sm btn--icon-del del-item-btn">Delete</button>
       </div>
     </div>
     <div class="fields-grid">
@@ -457,7 +457,7 @@ document.addEventListener('click', (e) => {
     const i = list.children.length;
     const div = document.createElement('div');
     div.className = 'step-item'; div.dataset.step = i;
-    div.innerHTML = `<input class="step-title" placeholder="Step title" /><input class="step-desc" placeholder="Step description" /><button class="btn btn--icon btn--del remove-step" data-i="${i}" style="flex-shrink:0">✕</button>`;
+    div.innerHTML = `<input class="step-title" placeholder="Step title" /><input class="step-desc" placeholder="Step description" /><button class="btn btn--sm btn--icon-del remove-step" data-i="${i}" style="flex-shrink:0">✕</button>`;
     list.appendChild(div);
   }
   if (e.target.classList.contains('add-impact-btn')) {
@@ -465,7 +465,7 @@ document.addEventListener('click', (e) => {
     const i = list.children.length;
     const div = document.createElement('div');
     div.className = 'step-item'; div.dataset.imp = i;
-    div.innerHTML = `<input class="imp-value" placeholder="Value" style="max-width:120px" /><input class="imp-label" placeholder="Label" /><button class="btn btn--icon btn--del remove-impact" data-i="${i}" style="flex-shrink:0">✕</button>`;
+    div.innerHTML = `<input class="imp-value" placeholder="Value" style="max-width:120px" /><input class="imp-label" placeholder="Label" /><button class="btn btn--sm btn--icon-del remove-impact" data-i="${i}" style="flex-shrink:0">✕</button>`;
     list.appendChild(div);
   }
   if (e.target.classList.contains('add-outcome-btn')) {
@@ -473,7 +473,7 @@ document.addEventListener('click', (e) => {
     const i = list.children.length;
     const div = document.createElement('div');
     div.className = 'step-item'; div.dataset.out = i;
-    div.innerHTML = `<input class="outcome-text" placeholder="Outcome" /><button class="btn btn--icon btn--del remove-outcome" data-i="${i}" style="flex-shrink:0">✕</button>`;
+    div.innerHTML = `<input class="outcome-text" placeholder="Outcome" /><button class="btn btn--sm btn--icon-del remove-outcome" data-i="${i}" style="flex-shrink:0">✕</button>`;
     list.appendChild(div);
   }
   if (e.target.classList.contains('remove-step') || e.target.classList.contains('remove-impact') || e.target.classList.contains('remove-outcome')) {

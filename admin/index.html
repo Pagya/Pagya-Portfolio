@@ -3,78 +3,109 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>Portfolio Admin</title>
+  <title>Portfolio Admin — OP</title>
   <link rel="preconnect" href="https://fonts.googleapis.com" />
   <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet" />
-  <link rel="stylesheet" href="admin.css" />
-  <!-- Google Identity Services -->
+  <link rel="stylesheet" href="/admin/admin.css" />
   <script src="https://accounts.google.com/gsi/client" async defer></script>
 </head>
 <body>
 
-  <!-- LOGIN -->
+  <!-- ── LOGIN ── -->
   <div class="login-screen" id="loginScreen">
     <div class="login-card">
-      <div class="login-logo">OP</div>
-      <h1 class="login-title">Portfolio Admin</h1>
-      <p class="login-sub">Sign in with your Google account to manage portfolio content</p>
+      <div class="login-logo-wrap">
+        <div class="login-logo">OP</div>
+        <div>
+          <div class="login-brand">Portfolio <span>Admin</span></div>
+        </div>
+      </div>
+      <h1 class="login-title">Welcome back</h1>
+      <p class="login-sub">Sign in with your Google account to manage your portfolio content.</p>
+      <div class="login-divider">Continue with</div>
       <div id="googleBtn"></div>
       <p class="login-error" id="loginError"></p>
-      <p class="login-hint">Access is restricted to the authorised account only.</p>
+      <p class="login-hint">🔒 Access is restricted to the authorised account only.</p>
     </div>
   </div>
 
-  <!-- DASHBOARD -->
+  <!-- ── DASHBOARD ── -->
   <div class="dashboard hidden" id="dashboard">
+
+    <!-- Sidebar -->
     <aside class="sidebar">
-      <div class="sidebar__logo">OP Admin</div>
+      <div class="sidebar__header">
+        <div class="sidebar__logo-row">
+          <div class="sidebar__logo-icon">OP</div>
+          <span class="sidebar__logo-text">Portfolio Admin</span>
+        </div>
+        <div class="sidebar__subtitle">Content Manager</div>
+      </div>
+
       <nav class="sidebar__nav">
-        <a href="#" class="nav-item active" data-section="hero">🏠 Hero</a>
-        <a href="#" class="nav-item" data-section="about">👤 About</a>
-        <a href="#" class="nav-item" data-section="achievements">📈 Achievements</a>
-        <a href="#" class="nav-item" data-section="caseStudies">📋 Case Studies</a>
-        <a href="#" class="nav-item" data-section="skills">🛠️ Skills</a>
-        <a href="#" class="nav-item" data-section="experience">💼 Experience</a>
-        <a href="#" class="nav-item" data-section="contact">✉️ Contact</a>
+        <div class="nav-section-label">Sections</div>
+        <a href="#" class="nav-item active" data-section="hero">
+          <span class="nav-icon">🏠</span> Hero
+        </a>
+        <a href="#" class="nav-item" data-section="about">
+          <span class="nav-icon">👤</span> About
+        </a>
+        <a href="#" class="nav-item" data-section="achievements">
+          <span class="nav-icon">📈</span> Achievements
+        </a>
+        <a href="#" class="nav-item" data-section="caseStudies">
+          <span class="nav-icon">📋</span> Case Studies
+        </a>
+        <a href="#" class="nav-item" data-section="skills">
+          <span class="nav-icon">🛠️</span> Skills
+        </a>
+        <a href="#" class="nav-item" data-section="experience">
+          <span class="nav-icon">💼</span> Experience
+        </a>
+        <a href="#" class="nav-item" data-section="contact">
+          <span class="nav-icon">✉️</span> Contact
+        </a>
       </nav>
-      <div class="sidebar__actions">
+
+      <div class="sidebar__footer">
         <div class="user-badge" id="userBadge"></div>
-        <button class="btn btn--publish" id="publishBtn">🚀 Publish to Live</button>
-        <button class="btn btn--reset" id="resetBtn">↩️ Reset Draft</button>
-        <a href="/" target="_blank" class="btn btn--ghost">👁 View Live Site</a>
-        <button class="btn btn--ghost" id="logoutBtn">Sign Out</button>
+        <button class="sidebar-btn sidebar-btn--publish" id="publishBtn">🚀 Publish to Live</button>
+        <button class="sidebar-btn sidebar-btn--reset" id="resetBtn">↩️ Reset Draft</button>
+        <a href="/" target="_blank" class="sidebar-btn sidebar-btn--view">👁 View Live Site</a>
+        <button class="sidebar-btn sidebar-btn--logout" id="logoutBtn">Sign Out</button>
       </div>
     </aside>
 
+    <!-- Main -->
     <main class="main">
       <div class="main__topbar">
-        <div>
+        <div class="topbar__left">
           <h2 class="main__title" id="sectionTitle">Hero</h2>
-          <span class="draft-badge">✏️ Editing Draft</span>
+          <span class="draft-badge">✏️ Draft</span>
         </div>
-        <button class="btn btn--save" id="saveBtn">Save Changes</button>
+        <div class="topbar__actions">
+          <button class="btn btn--save" id="saveBtn">💾 Save Changes</button>
+        </div>
       </div>
-      <div class="main__content" id="editorArea">
-        <!-- dynamically rendered -->
-      </div>
+      <div class="main__content" id="editorArea"></div>
     </main>
   </div>
 
-  <!-- CONFIRM MODAL -->
+  <!-- ── CONFIRM MODAL ── -->
   <div class="modal-overlay hidden" id="modalOverlay">
     <div class="modal">
       <h3 class="modal__title" id="modalTitle">Are you sure?</h3>
       <p class="modal__body" id="modalBody"></p>
       <div class="modal__actions">
-        <button class="btn btn--ghost" id="modalCancel">Cancel</button>
+        <button class="btn btn--ghost-dark" id="modalCancel">Cancel</button>
         <button class="btn btn--danger" id="modalConfirm">Confirm</button>
       </div>
     </div>
   </div>
 
-  <!-- TOAST -->
+  <!-- ── TOAST ── -->
   <div class="toast hidden" id="toast"></div>
 
-  <script src="admin.js"></script>
+  <script src="/admin/admin.js"></script>
 </body>
 </html>
