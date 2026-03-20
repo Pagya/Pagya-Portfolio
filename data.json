@@ -1,0 +1,161 @@
+{
+  "hero": {
+    "name": "O. Pagya",
+    "title": "Business Analyst · Product Thinker · AI Enabler",
+    "value": "I turn ambiguous business problems into scalable product solutions that drive measurable impact.",
+    "eyebrow": "Open to new opportunities"
+  },
+  "about": {
+    "heading": "I don't just document requirements. I shape product direction.",
+    "paragraphs": [
+      "I'm a Business/Product Analyst with 4 years at IDP Education, one of the world's largest international student placement platforms. My work spans the full product lifecycle — from discovery workshops and stakeholder alignment to BRD/FRD documentation, API integration specs, UAT, and post-launch analytics — across multi-country web, mobile, CRM, CMS, and payments platforms.",
+      "What sets me apart is the techno-functional bridge I build between business and engineering. I don't just translate requirements — I challenge assumptions with data, identify automation opportunities through As-Is/To-Be analysis, and lead AI-driven initiatives that reduce manual workload and scale operational impact. I've designed and shipped custom LLMs, WhatsApp chatbots, and internal AI portals that changed how teams work.",
+      "I measure success by outcomes: a 30% conversion lift, $450K/month in revenue leakage stopped, 40% reduction in manual workload. If the number didn't move, the work isn't done."
+    ],
+    "stats": [
+      { "number": "4+", "label": "Years in BA & Product" },
+      { "number": "$450K", "label": "Monthly Revenue Protected" },
+      { "number": "40%", "label": "Manual Workload Reduced" },
+      { "number": "3", "label": "AI Solutions Shipped" }
+    ]
+  },
+  "achievements": [
+    {
+      "id": "ach1",
+      "icon": "📈",
+      "metric": "+30%",
+      "title": "Conversion Rate Improvement",
+      "desc": "Drove a 30% uplift in conversion across IDP's eCommerce and student service funnels through requirements analysis, A/B testing, UX collaboration, and targeted customer-centric enhancements.",
+      "tag": "Product Analytics · A/B Testing · UX"
+    },
+    {
+      "id": "ach2",
+      "icon": "🛡️",
+      "metric": "$450K/mo",
+      "title": "Revenue Leakage Mitigated",
+      "desc": "Performed root-cause analysis on reconciliation gaps, vendor mismatches, and API integration failures. Drove cross-functional corrective measures that stopped ~$450K/month in silent revenue loss.",
+      "tag": "Root Cause Analysis · API · Finance Ops"
+    },
+    {
+      "id": "ach3",
+      "icon": "🤖",
+      "metric": "-40%",
+      "title": "Manual Workload via AI",
+      "desc": "Designed and launched 3 AI-powered solutions — a custom LLM, WhatsApp chatbot, and internal AI portal — that cut manual workload by 40% and significantly improved operational turnaround time.",
+      "tag": "LLM · Chatbot · AI Automation"
+    },
+    {
+      "id": "ach4",
+      "icon": "⚡",
+      "metric": "+25% / +18%",
+      "title": "Journey Completion & CSAT",
+      "desc": "Increased journey completion by 25% and boosted customer satisfaction scores by 18% through user research, journey mapping, and cross-functional UX alignment across global platforms.",
+      "tag": "User Research · Journey Mapping · CSAT"
+    }
+  ],
+  "caseStudies": [
+    {
+      "id": "cs1",
+      "number": "01",
+      "tag": "Revenue Operations",
+      "title": "Stopping $450K/Month in Revenue Leakage",
+      "summary": "How I identified silent reconciliation failures across IDP's payment ecosystem and led the cross-functional fix that closed the gap.",
+      "problem": "Finance flagged a growing discrepancy between invoiced amounts and actual payments received across IDP's multi-country platform. The gap had reached ~$450K/month but was being dismissed as 'system noise.' No one had traced it to a root cause.",
+      "context": "IDP's payments infrastructure spans multiple countries, currencies, and third-party payment providers. Reconciliation between the CRM, payment gateway, and finance systems was partially manual — creating blind spots whenever vendor data or API responses were inconsistent.",
+      "role": "Lead Business/Product Analyst. I owned the investigation end-to-end — from data analysis and root-cause workshops to requirements definition, cross-functional alignment, and UAT sign-off.",
+      "steps": [
+        { "title": "Data investigation", "desc": "Used SQL and BI dashboards to cross-reference payment gateway responses against CRM records. Identified 3 recurring failure patterns: reconciliation gaps, vendor data mismatches, and silent API integration errors." },
+        { "title": "Root cause workshop", "desc": "Facilitated a cross-functional session with Finance, Engineering, and Payments vendors to map the full transaction flow and pinpoint where data was being lost or misrouted." },
+        { "title": "Stakeholder alignment", "desc": "Quantified the impact and presented findings to senior leadership. Secured prioritisation on the next sprint cycle." },
+        { "title": "Requirements definition", "desc": "Wrote BRDs and user stories covering automated reconciliation logic, vendor mismatch alerting, and API error handling with retry mechanisms." },
+        { "title": "UAT & compliance", "desc": "Designed test scenarios for all failure modes. Validated GDPR alignment for cross-border payment data handling before go-live." }
+      ],
+      "solution": "Automated reconciliation logic with real-time discrepancy alerting, vendor mismatch detection, and corrective API retry flows. Paired with a BI dashboard giving Finance full visibility into payment status across all markets.",
+      "impact": [
+        { "value": "~$450K/mo", "label": "Revenue leakage mitigated" },
+        { "value": "-50%", "label": "Manual reporting effort" },
+        { "value": "GDPR", "label": "Compliant across all markets" }
+      ],
+      "learnings": "Revenue leakage at this scale is almost always a data visibility problem before it's a technical one. SQL fluency and BI ownership gave me the evidence to move stakeholders fast. I've since made reconciliation analysis a standard part of any payments-adjacent discovery."
+    },
+    {
+      "id": "cs2",
+      "number": "02",
+      "tag": "AI & Automation",
+      "title": "Building AI-Powered Solutions That Cut Manual Work by 40%",
+      "summary": "How I led the design and launch of a custom LLM, WhatsApp chatbot, and internal AI portal to transform how IDP's teams operate.",
+      "problem": "IDP's operations teams were spending significant time on repetitive, document-heavy workflows — student query handling, internal knowledge retrieval, and manual data processing. The volume was growing faster than headcount could scale.",
+      "context": "IDP serves students across multiple countries with complex, document-intensive processes. The business needed intelligent automation that could handle high-volume queries, surface institutional knowledge, and reduce turnaround time — without compromising accuracy or compliance.",
+      "role": "Lead BA and product owner for all three AI initiatives. I defined the problem space, wrote requirements, coordinated with Engineering and UX, managed stakeholder expectations, and tracked post-launch impact metrics.",
+      "steps": [
+        { "title": "As-Is process mapping", "desc": "Documented current workflows for student query handling and internal knowledge retrieval. Identified the highest-volume, highest-friction tasks as automation candidates." },
+        { "title": "Solution scoping", "desc": "Defined 3 distinct AI use cases — a custom LLM for internal knowledge, a WhatsApp chatbot for student-facing queries, and an AI portal for operational teams. Wrote FRDs for each." },
+        { "title": "Cross-functional build", "desc": "Collaborated with Engineering on LLM fine-tuning requirements, UX on conversation design, and Compliance on data handling and GDPR alignment." },
+        { "title": "Phased rollout", "desc": "Launched the WhatsApp chatbot first (highest volume impact), followed by the internal AI portal, then the custom LLM. Monitored deflection rates and turnaround time after each release." },
+        { "title": "Iteration", "desc": "Used Heap and Hotjar analytics alongside user feedback to identify gaps in chatbot coverage and refine LLM response quality." }
+      ],
+      "solution": "Three production AI solutions: a WhatsApp chatbot handling student queries at scale, a custom LLM surfacing institutional knowledge for internal teams, and an AI portal consolidating operational workflows — all GDPR-compliant and integrated into existing systems.",
+      "impact": [
+        { "value": "-40%", "label": "Manual workload reduced" },
+        { "value": "3", "label": "AI solutions shipped" },
+        { "value": "Faster", "label": "Operational turnaround time" }
+      ],
+      "learnings": "AI initiatives fail when BAs treat them as tech projects. The real work is process mapping — understanding exactly which human decisions can be automated and which can't. I now start every AI engagement with a workflow audit before touching a single requirement."
+    },
+    {
+      "id": "cs3",
+      "number": "03",
+      "tag": "Conversion Optimisation",
+      "title": "30% Conversion Lift on IDP's Student Journey",
+      "summary": "How user research, funnel analysis, and cross-functional UX alignment turned a stagnant funnel into a measurable growth driver.",
+      "problem": "IDP's student service funnel was underperforming. Users were dropping off before completing key actions — application submissions, counsellor bookings, and payment flows. Previous UI changes had moved nothing.",
+      "context": "IDP's website and eCommerce platform serves students across multiple countries navigating complex decisions about studying abroad. The funnel spanned web and mobile, with significant drop-off at multiple stages.",
+      "role": "Lead BA embedded in the product squad. I owned discovery, requirements, A/B test design, and cross-functional coordination across UX, Engineering, and Data teams.",
+      "steps": [
+        { "title": "Funnel analysis", "desc": "Used Google Analytics, Heap, and Hotjar heatmaps to build a step-by-step drop-off map. Identified the exact screens and interactions where users were abandoning." },
+        { "title": "User research", "desc": "Conducted user research and journey mapping sessions to understand the 'why' behind the data. Uncovered friction points around information clarity, trust signals, and mobile UX gaps." },
+        { "title": "Prioritisation", "desc": "Ran a MoSCoW workshop with stakeholders to rank findings by impact and effort. Focused the first release on the highest-leverage fixes." },
+        { "title": "A/B testing", "desc": "Designed and ran A/B tests on key funnel steps. Used results to validate hypotheses before committing to full implementation." },
+        { "title": "Iterative delivery", "desc": "Shipped improvements across multiple sprints, tracking conversion metrics after each release to confirm impact before proceeding." }
+      ],
+      "solution": "A series of targeted, data-validated enhancements across the student journey — improved information architecture, stronger trust signals, mobile UX fixes, and streamlined payment flows — all grounded in user research and A/B test evidence.",
+      "impact": [
+        { "value": "+30%", "label": "Conversion rate" },
+        { "value": "+25%", "label": "Journey completion" },
+        { "value": "+18%", "label": "Customer satisfaction" }
+      ],
+      "learnings": "The previous team was optimising the wrong things. Heatmaps and session data told a completely different story than stakeholder assumptions. I now treat analytics tools as the first input to any discovery — not a post-launch afterthought."
+    }
+  ],
+  "skills": {
+    "business": ["Requirements Elicitation", "BRD / FRD / User Stories", "Use Cases & Acceptance Criteria", "Stakeholder Management", "As-Is / To-Be Modelling", "Gap & Market Analysis", "Process Optimisation", "UAT Planning & Execution", "Change Management", "Workshop Facilitation"],
+    "product": ["User Journey Mapping", "Agile / Scrum", "GTM Strategy", "Roadmap Planning", "A/B Testing", "Funnel & Path Analysis", "MoSCoW Prioritisation", "API & System Integrations", "CRM / CMS Implementation", "Microservices Analysis", "GDPR & Compliance", "UI/UX Collaboration"],
+    "tools": ["Jira", "Confluence", "SQL", "Power BI", "Tableau", "Google Analytics", "Heap", "Hotjar", "Figma", "Miro", "SAP CRM", "Contentful", "HubSpot", "Workato", "Azure", "Genesys"]
+  },
+  "experience": [
+    {
+      "id": "exp1",
+      "role": "Business / Product Analyst",
+      "company": "IDP Education Pvt. Ltd.",
+      "location": "Chennai",
+      "industry": "EdTech / B2B & B2C",
+      "period": "Mar 2022 – Present",
+      "summary": "Embedded across IDP's core product squads, owning requirements end-to-end for multi-country platforms spanning Student Services, CRM, CMS, Payments, and Partner Integrations.",
+      "outcomes": [
+        "Improved conversion rates by 30% through A/B testing, UX collaboration, and customer-centric enhancements",
+        "Mitigated ~$450K/month in revenue leakage via root-cause analysis on reconciliation gaps and API failures",
+        "Designed and launched 3 AI solutions (custom LLM, WhatsApp chatbot, AI portal) — reduced manual workload by 40%",
+        "Increased journey completion by 25% and customer satisfaction by 18% through user research and journey mapping",
+        "Built BI dashboards (MRR, funnel, path analysis) cutting manual reporting by 50% and saving 10+ hours/week",
+        "Delivered GDPR-compliant API integrations with financial and healthcare providers across global markets",
+        "Improved delivery timelines by 20% through structured stakeholder workshops (SWOT, MoSCoW, story mapping)"
+      ]
+    }
+  ],
+  "contact": {
+    "intro": "I'm open to Business Analyst, Product Analyst, and product consulting roles — particularly in EdTech, FinTech, or digital transformation. If you're building something complex and need someone who can own the problem space end-to-end, let's talk.",
+    "phone": "+91 75488 11087",
+    "email": "pagya@example.com",
+    "linkedin": "linkedin.com/in/pagya"
+  }
+}
