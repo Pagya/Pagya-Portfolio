@@ -25,9 +25,12 @@ const DRAFT_FILE = process.env.VERCEL
 const app = express();
 app.use(express.json());
 
-// ── Admin page — inject Google Client ID (must be BEFORE static) ─
+// ── Admin page — inject Google Client ID + fix asset paths ───────
 app.get(['/admin', '/admin/'], (req, res) => {
   let html = fs.readFileSync(path.join(__dirname, 'admin/index.html'), 'utf8');
+  // Fix relative asset paths to absolute
+  html = html.replace('href="admin.css"', 'href="/admin/admin.css"');
+  html = html.replace('src="admin.js"', 'src="/admin/admin.js"');
   html = html.replace(
     '</head>',
     `<script>window.__GOOGLE_CLIENT_ID__ = "${GOOGLE_CLIENT_ID}";</script>\n</head>`
@@ -36,7 +39,10 @@ app.get(['/admin', '/admin/'], (req, res) => {
   res.send(html);
 });
 
-// Serve all other static files (admin/admin.css, admin/admin.js, etc.)
+// Serve admin static assets explicitly
+app.use('/admin', express.static(path.join(__dirname, 'admin')));
+
+// Serve all other static files
 app.use(express.static(__dirname, { index: false }));
 // Serve index.html at root explicitly
 app.get('/', (req, res) => res.sendFile(path.join(__dirname, 'index.html')));
