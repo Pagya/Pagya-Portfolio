@@ -101,17 +101,6 @@ app.post('/api/auth/google', async (req, res) => {
   }
 });
 
-// ── Admin page — inject Google Client ID ─────────────────────────
-app.get('/admin/', (req, res) => {
-  let html = fs.readFileSync(path.join(__dirname, 'admin/index.html'), 'utf8');
-  html = html.replace(
-    '</head>',
-    `<script>window.__GOOGLE_CLIENT_ID__ = "${GOOGLE_CLIENT_ID}";</script>\n</head>`
-  );
-  res.setHeader('Content-Type', 'text/html');
-  res.send(html);
-});
-
 // ── Public data ──────────────────────────────────────────────────
 app.get('/api/data', (req, res) => res.json(readJSON(DATA_FILE)));
 
