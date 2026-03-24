@@ -497,8 +497,11 @@ async function api(url, method = 'GET', body = null, auth = true) {
   const headers = { 'Content-Type': 'application/json' };
   if (auth && token) headers['Authorization'] = `Bearer ${token}`;
   const res = await fetch(url, { method, headers, body: body ? JSON.stringify(body) : null });
-  const data = await res.json();
-  if (!res.ok) throw new Error(data.error || 'Request failed');
+  const text = await res.text();
+  let data;
+  try { data = JSON.parse(text); }
+  catch { throw new Error(`Server error (${res.status}): ${text.slice(0, 120)}`); }
+  if (!res.ok) throw new Error(data.error || `Request failed (${res.status})`);
   return data;
 }
 
