@@ -2,14 +2,15 @@
   "hero": {
     "name": "O. Pagya",
     "title": "Business Analyst · Product Thinker · AI Enabler",
-    "value": "I turn ambiguous business problems into scalable product solutions that drive measurable impact.",
-    "eyebrow": "Open to new opportunities"
+    "value": "I turn ambiguous business problems into scalable product solutions — backed by data, grounded in user needs, and measured by outcomes.",
+    "eyebrow": "Open to BA · Product Analyst · PM roles"
   },
   "about": {
     "heading": "I don't just document requirements. I shape product direction.",
     "paragraphs": [
-      "I'm a Business/Product Analyst with 4 years at IDP Education, one of the world's largest international student placement platforms. My work spans the full product lifecycle — from discovery workshops and stakeholder alignment to BRD/FRD documentation, API integration specs, UAT, and post-launch analytics — across multi-country web, mobile, CRM, CMS, and payments platforms.",
-      "What sets me apart is the techno-functional bridge I build between business and engineering. I don't just translate requirements — I challenge assumptions with data, identify automation opportunities through As-Is/To-Be analysis, and lead AI-driven initiatives that reduce manual workload and scale operational impact. I've designed and shipped custom LLMs, WhatsApp chatbots, and internal AI portals that changed how teams work.",
+      "I'm a Business/Product Analyst with 4 years at IDP Education — one of the world's largest international student placement platforms. My work spans the full product lifecycle: discovery workshops, stakeholder alignment, BRD/FRD documentation, API integration specs, UAT, and post-launch analytics — across multi-country web, mobile, CRM, CMS, and payments platforms.",
+      "What sets me apart is the techno-functional bridge I build between business and engineering. I challenge assumptions with data, identify automation opportunities through As-Is/To-Be analysis, and lead AI-driven initiatives that reduce manual workload and scale operational impact. I've designed and shipped custom LLMs, WhatsApp chatbots, and internal AI portals that changed how teams work.",
+      "I hold an MBA in Banking Technology from Pondicherry University and a B.E. in Electrical & Electronics Engineering from PSG College of Technology — a combination that gives me both the business rigour and technical fluency to operate at the intersection of product, data, and engineering. I'm CCBA certified and hold multiple IIBA and Product School certifications.",
       "I measure success by outcomes: a 30% conversion lift, $450K/month in revenue leakage stopped, 40% reduction in manual workload. If the number didn't move, the work isn't done."
     ],
     "stats": [
@@ -51,6 +52,22 @@
       "title": "Journey Completion & CSAT",
       "desc": "Increased journey completion by 25% and boosted customer satisfaction scores by 18% through user research, journey mapping, and cross-functional UX alignment across global platforms.",
       "tag": "User Research · Journey Mapping · CSAT"
+    },
+    {
+      "id": "ach5",
+      "icon": "⏱️",
+      "metric": "-50%",
+      "title": "Reporting Time Saved",
+      "desc": "Built and owned BI dashboards covering MRR, funnel analysis, and path exploration — reducing manual reporting effort by 50% and saving 10+ hours per week across Finance and Product teams.",
+      "tag": "Power BI · SQL · Data Analytics"
+    },
+    {
+      "id": "ach6",
+      "icon": "🚀",
+      "metric": "+20%",
+      "title": "Delivery Timeline Improvement",
+      "desc": "Improved delivery timelines by 20% through structured stakeholder workshops (SWOT, MoSCoW, story mapping) that aligned business value with technical feasibility before sprint planning.",
+      "tag": "Agile · Workshop Facilitation · Stakeholder Mgmt"
     }
   ],
   "caseStudies": [
@@ -125,37 +142,192 @@
         { "value": "+18%", "label": "Customer satisfaction" }
       ],
       "learnings": "The previous team was optimising the wrong things. Heatmaps and session data told a completely different story than stakeholder assumptions. I now treat analytics tools as the first input to any discovery — not a post-launch afterthought."
+    },
+    {
+      "id": "cs4",
+      "number": "04",
+      "tag": "API & System Integration",
+      "title": "Delivering Secure API Integrations Across Financial & Healthcare Providers",
+      "summary": "How I defined integration requirements, ensured GDPR compliance, and enabled IDP to onboard banking, payments, and insurance services across global markets.",
+      "problem": "IDP needed to expand its service offering by integrating with financial and healthcare providers — enabling students to access banking, insurance, and payment services directly through the platform. The challenge: each provider had different API contracts, data formats, and compliance requirements across multiple countries.",
+      "context": "IDP operates across 50+ countries. Any integration touching financial or health data requires strict GDPR alignment, country-specific compliance checks, and robust error handling. Engineering teams needed precise, testable specifications — not vague business requirements.",
+      "role": "Lead BA for all financial and healthcare API integrations. I owned the requirements, integration mapping, compliance review, and UAT coordination from discovery through go-live.",
+      "steps": [
+        { "title": "Provider discovery", "desc": "Mapped each provider's API documentation, data schemas, and authentication flows. Identified gaps between provider capabilities and IDP's platform requirements." },
+        { "title": "Integration requirements", "desc": "Wrote detailed FRDs covering request/response schemas, error handling, retry logic, timeout behaviour, and data transformation rules for each integration." },
+        { "title": "Compliance review", "desc": "Worked with Legal and Compliance to validate GDPR alignment for each data type — particularly PII handling, consent flows, and cross-border data transfer rules." },
+        { "title": "UAT design", "desc": "Created test scenarios covering happy paths, edge cases, and failure modes. Coordinated UAT execution with Engineering, QA, and provider teams." },
+        { "title": "Go-live & monitoring", "desc": "Defined post-launch monitoring criteria and built BI alerts for integration failure rates. Established a feedback loop for ongoing provider issues." }
+      ],
+      "solution": "A suite of production-ready API integrations with financial and healthcare providers — fully documented, GDPR-compliant, and monitored — enabling IDP to offer banking, payments, and insurance services to students across global markets.",
+      "impact": [
+        { "value": "5+", "label": "Provider integrations delivered" },
+        { "value": "GDPR", "label": "Compliant across all markets" },
+        { "value": "Zero", "label": "Compliance incidents post-launch" }
+      ],
+      "learnings": "API integration work lives or dies on the quality of the requirements. Vague specs create ambiguity that surfaces as bugs in UAT — or worse, in production. I now treat integration FRDs as contracts: every field, every error code, every edge case documented before a single line of code is written."
     }
   ],
   "skills": {
-    "business": ["Requirements Elicitation", "BRD / FRD / User Stories", "Use Cases & Acceptance Criteria", "Stakeholder Management", "As-Is / To-Be Modelling", "Gap & Market Analysis", "Process Optimisation", "UAT Planning & Execution", "Change Management", "Workshop Facilitation"],
-    "product": ["User Journey Mapping", "Agile / Scrum", "GTM Strategy", "Roadmap Planning", "A/B Testing", "Funnel & Path Analysis", "MoSCoW Prioritisation", "API & System Integrations", "CRM / CMS Implementation", "Microservices Analysis", "GDPR & Compliance", "UI/UX Collaboration"],
-    "tools": ["Jira", "Confluence", "SQL", "Power BI", "Tableau", "Google Analytics", "Heap", "Hotjar", "Figma", "Miro", "SAP CRM", "Contentful", "HubSpot", "Workato", "Azure", "Genesys"]
+    "business": ["Requirements Elicitation", "BRD / FRD / User Stories", "Use Cases & Acceptance Criteria", "Stakeholder Management", "As-Is / To-Be Modelling", "Gap & Market Analysis", "Process Optimisation", "UAT Planning & Execution", "Change Management", "Workshop Facilitation", "SWOT Analysis", "MoSCoW Prioritisation"],
+    "product": ["User Journey Mapping", "Agile / Scrum", "GTM Strategy", "Roadmap Planning", "A/B Testing", "Funnel & Path Analysis", "API & System Integrations", "CRM / CMS Implementation", "Microservices Analysis", "GDPR & Compliance", "UI/UX Collaboration", "Product-Led Growth", "Backlog Prioritisation", "Sprint Planning"],
+    "tools": ["Jira", "Confluence", "SQL", "Power BI", "Tableau", "Google Analytics", "Heap", "Hotjar", "Figma", "Balsamiq", "Miro", "SAP CRM", "Contentful", "HubSpot", "Workato", "Azure", "Genesys", "Visio", "Kiro", "Loveable"]
   },
   "experience": [
     {
       "id": "exp1",
       "role": "Business / Product Analyst",
       "company": "IDP Education Pvt. Ltd.",
-      "location": "Chennai",
+      "location": "Chennai, TN",
       "industry": "EdTech / B2B & B2C",
       "period": "Mar 2022 – Present",
-      "summary": "Embedded across IDP's core product squads, owning requirements end-to-end for multi-country platforms spanning Student Services, CRM, CMS, Payments, and Partner Integrations.",
+      "summary": "Embedded across IDP's core product squads, owning requirements end-to-end for multi-country platforms spanning Student Services, CRM, CMS, Payments, and Partner Integrations. Act as the techno-functional bridge between business stakeholders and engineering teams globally.",
       "outcomes": [
+        "Led end-to-end requirements gathering (BRD, FRD, user stories, use cases, process flows, acceptance criteria) across multi-country platforms",
         "Improved conversion rates by 30% through A/B testing, UX collaboration, and customer-centric enhancements",
         "Mitigated ~$450K/month in revenue leakage via root-cause analysis on reconciliation gaps and API failures",
         "Designed and launched 3 AI solutions (custom LLM, WhatsApp chatbot, AI portal) — reduced manual workload by 40%",
         "Increased journey completion by 25% and customer satisfaction by 18% through user research and journey mapping",
         "Built BI dashboards (MRR, funnel, path analysis) cutting manual reporting by 50% and saving 10+ hours/week",
         "Delivered GDPR-compliant API integrations with financial and healthcare providers across global markets",
-        "Improved delivery timelines by 20% through structured stakeholder workshops (SWOT, MoSCoW, story mapping)"
+        "Improved delivery timelines by 20% through structured stakeholder workshops (SWOT, MoSCoW, story mapping)",
+        "Managed product ideation, market analysis, stakeholder communication, and roadmap planning for IDP Website and eCommerce payments",
+        "Supported UAT planning and execution ensuring delivered solutions met documented business requirements and compliance needs",
+        "Drove end-to-end Agile delivery, managing backlog prioritisation and ensuring sprint goals were consistently achieved"
       ]
     }
   ],
+  "education": [
+    {
+      "id": "edu1",
+      "degree": "Master of Business Administration",
+      "institution": "Pondicherry University",
+      "location": "Pondicherry",
+      "period": "July 2020 – June 2022",
+      "dept": "Dept. of Banking Technology",
+      "gpa": "8.0 / 10.0",
+      "coursework": "Product Analysis, Lean & Six Sigma, Data Analytics, Power BI"
+    },
+    {
+      "id": "edu2",
+      "degree": "Bachelor of Engineering",
+      "institution": "PSG College of Technology",
+      "location": "Coimbatore",
+      "period": "Aug 2016 – June 2020",
+      "dept": "Electrical & Electronics Engineering",
+      "gpa": "7.5 / 10.0",
+      "coursework": "Statistical Analysis, Artificial Intelligence, MATLAB"
+    }
+  ],
+  "certifications": [
+    { "id": "cert1", "name": "CCBA – Certification of Capability in Business Analysis", "issuer": "IIBA", "icon": "🏆" },
+    { "id": "cert2", "name": "Business Analysis & Product Management", "issuer": "IIBA Endorsed", "icon": "📜" },
+    { "id": "cert3", "name": "Agile Product Owner & Data-Driven Product Management", "issuer": "IIBA, NASBA", "icon": "⚡" },
+    { "id": "cert4", "name": "Product Analytics & Product-Led Growth", "issuer": "Product School, NASBA", "icon": "📈" },
+    { "id": "cert5", "name": "UX Design, SEO & Competitive Analysis", "issuer": "Professional Certification", "icon": "🎨" }
+  ],
+  "pmExercises": [
+    {
+      "id": "pm1",
+      "category": "Product Strategy",
+      "icon": "🎯",
+      "title": "Define a Product Vision & Strategy",
+      "description": "Pick any product you use daily. Write a 1-page product vision, identify the target user segment, define the core value proposition, and outline a 6-month roadmap with 3 key bets.",
+      "framework": "Vision → Strategy → Roadmap",
+      "difficulty": "Beginner",
+      "time": "2–3 hours",
+      "deliverable": "1-page vision doc + roadmap table",
+      "tip": "Start with 'Who is this for?' before 'What should we build?'"
+    },
+    {
+      "id": "pm2",
+      "category": "Prioritisation",
+      "icon": "⚖️",
+      "title": "MoSCoW Prioritisation Exercise",
+      "description": "Take a backlog of 15–20 features for a hypothetical product (e.g. a student visa app). Categorise each as Must Have, Should Have, Could Have, or Won't Have. Justify each decision with a business rationale.",
+      "framework": "MoSCoW Framework",
+      "difficulty": "Beginner",
+      "time": "1–2 hours",
+      "deliverable": "Prioritised backlog with rationale column",
+      "tip": "If everything is a Must Have, nothing is. Force yourself to put at least 40% in Should/Could."
+    },
+    {
+      "id": "pm3",
+      "category": "User Research",
+      "icon": "🔍",
+      "title": "User Journey Mapping",
+      "description": "Map the end-to-end journey of a student applying to study abroad — from first awareness to visa approval. Identify touchpoints, emotions, pain points, and opportunities at each stage.",
+      "framework": "Journey Map (Stages → Actions → Emotions → Pain Points → Opportunities)",
+      "difficulty": "Intermediate",
+      "time": "3–4 hours",
+      "deliverable": "Journey map with opportunity annotations",
+      "tip": "Interview at least 2 real users before drawing the map. Assumptions kill journey maps."
+    },
+    {
+      "id": "pm4",
+      "category": "Metrics & Analytics",
+      "icon": "📊",
+      "title": "Define a Metrics Framework (HEART / AARRR)",
+      "description": "Choose a product (e.g. a food delivery app). Define its North Star Metric, then build a full AARRR funnel (Acquisition, Activation, Retention, Referral, Revenue) with specific KPIs and measurement methods for each stage.",
+      "framework": "AARRR Pirate Metrics + North Star",
+      "difficulty": "Intermediate",
+      "time": "2–3 hours",
+      "deliverable": "Metrics tree with KPIs, targets, and data sources",
+      "tip": "The North Star Metric should capture value delivered to users — not just revenue."
+    },
+    {
+      "id": "pm5",
+      "category": "Problem Framing",
+      "icon": "🧩",
+      "title": "Root Cause Analysis with 5 Whys",
+      "description": "Take a real product failure scenario (e.g. 'checkout abandonment increased by 20% last week'). Apply the 5 Whys technique to trace from symptom to root cause. Then write a hypothesis and proposed solution.",
+      "framework": "5 Whys → Fishbone Diagram → Hypothesis",
+      "difficulty": "Intermediate",
+      "time": "1–2 hours",
+      "deliverable": "5 Whys chain + fishbone diagram + solution hypothesis",
+      "tip": "Don't stop at the first 'why' that feels satisfying. Push to layer 4 or 5."
+    },
+    {
+      "id": "pm6",
+      "category": "Estimation",
+      "icon": "🔢",
+      "title": "Market Sizing & Estimation",
+      "description": "Estimate the total addressable market for a 'WhatsApp for enterprise compliance' product in India. Use both top-down (TAM/SAM/SOM) and bottom-up approaches. Show your assumptions clearly.",
+      "framework": "TAM → SAM → SOM (Top-down + Bottom-up)",
+      "difficulty": "Intermediate",
+      "time": "2 hours",
+      "deliverable": "Market sizing model with assumptions documented",
+      "tip": "Interviewers care more about your reasoning than the final number. Show your work."
+    },
+    {
+      "id": "pm7",
+      "category": "Product Design",
+      "icon": "✏️",
+      "title": "Design a Feature from Scratch",
+      "description": "Design a 'smart document checklist' feature for a student visa application platform. Write the user story, acceptance criteria, edge cases, and sketch a basic wireframe. Include how you'd measure success.",
+      "framework": "User Story → Acceptance Criteria → Wireframe → Success Metrics",
+      "difficulty": "Advanced",
+      "time": "4–5 hours",
+      "deliverable": "User story + AC + wireframe sketch + metrics definition",
+      "tip": "Write the acceptance criteria before the wireframe. It forces clarity on what 'done' means."
+    },
+    {
+      "id": "pm8",
+      "category": "Stakeholder Management",
+      "icon": "🤝",
+      "title": "Stakeholder Mapping & Communication Plan",
+      "description": "For a CRM implementation project, identify 8–10 stakeholders. Map them on a Power/Interest grid. Then write a tailored communication plan for each quadrant — what to share, how often, and in what format.",
+      "framework": "Power/Interest Grid → RACI → Comms Plan",
+      "difficulty": "Advanced",
+      "time": "3 hours",
+      "deliverable": "Stakeholder map + RACI matrix + communication plan",
+      "tip": "High power, low interest stakeholders are the most dangerous to ignore. Keep them satisfied proactively."
+    }
+  ],
   "contact": {
-    "intro": "I'm open to Business Analyst, Product Analyst, and product consulting roles — particularly in EdTech, FinTech, or digital transformation. If you're building something complex and need someone who can own the problem space end-to-end, let's talk.",
+    "intro": "I'm open to Business Analyst, Product Analyst, and Product Manager roles — particularly in EdTech, FinTech, or digital transformation. If you're building something complex and need someone who can own the problem space end-to-end, let's talk.",
     "phone": "+91 75488 11087",
-    "email": "pagya@example.com",
+    "email": "pagya261998@gmail.com",
     "linkedin": "linkedin.com/in/pagya"
   }
 }

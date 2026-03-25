@@ -1119,3 +1119,141 @@ button { cursor: pointer; border: none; background: none; font-family: inherit; 
 
 /* Active nav link */
 .nav__links a.active { color: var(--color-text); font-weight: 600; }
+
+/* ============================================
+   EDUCATION & CERTIFICATIONS
+   ============================================ */
+.edu-grid {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: var(--space-6);
+  margin-bottom: var(--space-12);
+}
+.edu-card {
+  display: flex;
+  gap: var(--space-5);
+  background: var(--color-surface);
+  border: 1px solid var(--color-border);
+  border-radius: var(--radius-xl);
+  padding: var(--space-7);
+}
+.edu-card__icon { font-size: 2rem; flex-shrink: 0; }
+.edu-card__degree { font-size: var(--font-size-lg); font-weight: 700; margin-bottom: var(--space-1); }
+.edu-card__inst { font-size: var(--font-size-sm); color: var(--color-text-secondary); margin-bottom: var(--space-1); }
+.edu-card__meta { font-size: var(--font-size-sm); color: var(--color-accent); font-weight: 600; margin-bottom: var(--space-2); }
+.edu-card__course { font-size: var(--font-size-sm); color: var(--color-text-secondary); }
+
+.subsection-title {
+  font-size: var(--font-size-xl);
+  font-weight: 700;
+  margin-bottom: var(--space-6);
+  margin-top: var(--space-4);
+}
+.certs-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
+  gap: var(--space-4);
+}
+.cert-card {
+  display: flex;
+  align-items: flex-start;
+  gap: var(--space-4);
+  background: var(--color-surface);
+  border: 1px solid var(--color-border);
+  border-radius: var(--radius-lg);
+  padding: var(--space-5);
+}
+.cert-card__icon { font-size: 1.5rem; flex-shrink: 0; }
+.cert-card__name { font-size: var(--font-size-sm); font-weight: 600; margin-bottom: 2px; }
+.cert-card__issuer { font-size: 12px; color: var(--color-text-secondary); }
+
+/* ============================================
+   PM EXERCISES
+   ============================================ */
+.pm-exercises { background: var(--color-bg-alt, #f8fafc); }
+.pm-exercises__grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(340px, 1fr));
+  gap: var(--space-6);
+  margin-top: var(--space-10);
+}
+.pm-exercise-card {
+  background: var(--color-surface);
+  border: 1px solid var(--color-border);
+  border-radius: var(--radius-xl);
+  padding: var(--space-7);
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-4);
+  transition: box-shadow var(--transition), transform var(--transition);
+}
+.pm-exercise-card:hover {
+  box-shadow: var(--shadow-lg);
+  transform: translateY(-3px);
+}
+.pm-exercise-card__top {
+  display: flex;
+  align-items: center;
+  gap: var(--space-3);
+  flex-wrap: wrap;
+}
+.pm-exercise-card__icon { font-size: 1.5rem; }
+.pm-exercise-card__category {
+  font-size: 12px;
+  font-weight: 600;
+  color: var(--color-accent);
+  background: rgba(37,99,235,0.08);
+  padding: 3px 10px;
+  border-radius: 99px;
+}
+.pm-exercise-card__difficulty {
+  font-size: 11px;
+  font-weight: 700;
+  padding: 3px 10px;
+  border-radius: 99px;
+  margin-left: auto;
+}
+.pm-difficulty--beginner { background: #dcfce7; color: #166534; }
+.pm-difficulty--intermediate { background: #fef9c3; color: #854d0e; }
+.pm-difficulty--advanced { background: #fee2e2; color: #991b1b; }
+
+.pm-exercise-card__title {
+  font-size: var(--font-size-lg);
+  font-weight: 700;
+  line-height: 1.3;
+}
+.pm-exercise-card__desc {
+  font-size: var(--font-size-sm);
+  color: var(--color-text-secondary);
+  line-height: 1.7;
+}
+.pm-exercise-card__meta {
+  display: flex;
+  gap: var(--space-4);
+  font-size: 12px;
+  color: var(--color-text-secondary);
+  flex-wrap: wrap;
+}
+.pm-exercise-card__framework {
+  font-size: 12px;
+  font-weight: 600;
+  color: var(--color-accent);
+  background: rgba(37,99,235,0.06);
+  border: 1px solid rgba(37,99,235,0.15);
+  padding: var(--space-2) var(--space-4);
+  border-radius: var(--radius-md);
+}
+.pm-exercise-card__tip {
+  font-size: 12px;
+  color: var(--color-text-secondary);
+  background: #fffbeb;
+  border-left: 3px solid #f59e0b;
+  padding: var(--space-3) var(--space-4);
+  border-radius: 0 var(--radius-md) var(--radius-md) 0;
+  line-height: 1.6;
+}
+
+@media (max-width: 900px) {
+  .edu-grid { grid-template-columns: 1fr; }
+  .pm-exercises__grid { grid-template-columns: 1fr; }
+}
