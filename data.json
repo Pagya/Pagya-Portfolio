@@ -169,9 +169,9 @@
     }
   ],
   "skills": {
-    "business": ["Requirements Elicitation", "BRD / FRD / User Stories", "Use Cases & Acceptance Criteria", "Stakeholder Management", "As-Is / To-Be Modelling", "Gap & Market Analysis", "Process Optimisation", "UAT Planning & Execution", "Change Management", "Workshop Facilitation", "SWOT Analysis", "MoSCoW Prioritisation"],
-    "product": ["User Journey Mapping", "Agile / Scrum", "GTM Strategy", "Roadmap Planning", "A/B Testing", "Funnel & Path Analysis", "API & System Integrations", "CRM / CMS Implementation", "Microservices Analysis", "GDPR & Compliance", "UI/UX Collaboration", "Product-Led Growth", "Backlog Prioritisation", "Sprint Planning"],
-    "tools": ["Jira", "Confluence", "SQL", "Power BI", "Tableau", "Google Analytics", "Heap", "Hotjar", "Figma", "Balsamiq", "Miro", "SAP CRM", "Contentful", "HubSpot", "Workato", "Azure", "Genesys", "Visio", "Kiro", "Loveable"]
+    "business": ["Requirements Elicitation", "BRD / FRD / User Stories", "Use Cases & Acceptance Criteria", "Critical & Analytical Thinking", "Stakeholder Management", "As-Is / To-Be Modelling", "Gap & Market Analysis", "Process Optimisation", "UAT Planning & Execution", "Change Management", "Workshop Facilitation", "SWOT Analysis", "MoSCoW Prioritisation", "Business Strategy", "GTM Strategy"],
+    "product": ["User Journey Mapping", "Agile / Scrum", "Roadmap Planning", "A/B Testing", "Funnel & Path Analysis", "API & System Integrations", "CRM Implementation", "CMS Implementation", "Microservices Analysis", "Mobile & Web Applications", "GDPR & Compliance", "UI/UX Collaboration", "Wireframing", "Product-Led Growth", "Backlog Prioritisation", "Sprint Planning"],
+    "tools": ["Jira", "Confluence", "SQL", "Power BI", "Tableau", "Google Analytics", "Heap", "Hotjar", "Heatmap", "Figma", "Balsamiq", "Miro", "Visio", "SAP CRM", "Contentful", "HubSpot", "Workato", "Azure", "Genesys", "Kiro", "Loveable"]
   },
   "experience": [
     {
@@ -326,7 +326,7 @@
   ],
   "contact": {
     "intro": "I'm open to Business Analyst, Product Analyst, and Product Manager roles — particularly in EdTech, FinTech, or digital transformation. If you're building something complex and need someone who can own the problem space end-to-end, let's talk.",
-    "phone": "+91 75488 11087",
+    "phone": "+91 7548811087",
     "email": "pagya261998@gmail.com",
     "linkedin": "linkedin.com/in/pagya"
   }
