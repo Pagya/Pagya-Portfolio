@@ -1,4 +1,20 @@
 /* ============================================
+   THEME — dark / light toggle
+   ============================================ */
+const themeToggle = document.getElementById('themeToggle');
+const savedTheme = localStorage.getItem('theme') || 'light';
+document.documentElement.setAttribute('data-theme', savedTheme);
+themeToggle.textContent = savedTheme === 'dark' ? '☀️' : '🌙';
+
+themeToggle.addEventListener('click', () => {
+  const current = document.documentElement.getAttribute('data-theme');
+  const next = current === 'dark' ? 'light' : 'dark';
+  document.documentElement.setAttribute('data-theme', next);
+  localStorage.setItem('theme', next);
+  themeToggle.textContent = next === 'dark' ? '☀️' : '🌙';
+});
+
+/* ============================================
    NAV — scroll state + mobile toggle
    ============================================ */
 const nav = document.getElementById('nav');
@@ -32,12 +48,16 @@ const revealObserver = new IntersectionObserver((entries) => {
       revealObserver.unobserve(entry.target);
     }
   });
-}, { threshold: 0.1, rootMargin: '0px 0px -40px 0px' });
+}, { threshold: 0.08, rootMargin: '0px 0px -30px 0px' });
 
-document.querySelectorAll('.reveal').forEach(el => revealObserver.observe(el));
+// Hero elements are always visible — skip them
+document.querySelectorAll('.reveal').forEach(el => {
+  if (el.closest('.hero')) return; // hero handled by CSS
+  revealObserver.observe(el);
+});
 
 /* ============================================
-   CONTACT FORM — basic validation + feedback
+   CONTACT FORM
    ============================================ */
 const form = document.getElementById('contactForm');
 if (form) {
@@ -49,18 +69,13 @@ if (form) {
     const message = form.querySelector('#message').value.trim();
 
     if (!name || !email || !message) {
-      showFormFeedback(form, 'Please fill in all fields.', 'error');
-      return;
+      showFormFeedback(form, 'Please fill in all fields.', 'error'); return;
     }
     if (!/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(email)) {
-      showFormFeedback(form, 'Please enter a valid email address.', 'error');
-      return;
+      showFormFeedback(form, 'Please enter a valid email address.', 'error'); return;
     }
-
     btn.textContent = 'Sending...';
     btn.disabled = true;
-
-    // Simulate async send — replace with real endpoint
     setTimeout(() => {
       showFormFeedback(form, "Message sent. I'll be in touch soon.", 'success');
       form.reset();
@@ -75,13 +90,7 @@ function showFormFeedback(form, message, type) {
   if (!feedback) {
     feedback = document.createElement('p');
     feedback.className = 'form-feedback';
-    feedback.style.cssText = `
-      font-size: 0.875rem;
-      font-weight: 500;
-      padding: 0.75rem 1rem;
-      border-radius: 8px;
-      margin-top: 0;
-    `;
+    feedback.style.cssText = 'font-size:0.875rem;font-weight:500;padding:0.75rem 1rem;border-radius:8px;margin-top:0;';
     form.appendChild(feedback);
   }
   feedback.textContent = message;
@@ -91,7 +100,7 @@ function showFormFeedback(form, message, type) {
 }
 
 /* ============================================
-   ACTIVE NAV LINK — highlight on scroll
+   ACTIVE NAV LINK
    ============================================ */
 const sections = document.querySelectorAll('section[id]');
 const navAnchors = document.querySelectorAll('.nav__links a[href^="#"]');
@@ -104,6 +113,6 @@ const sectionObserver = new IntersectionObserver((entries) => {
       if (active) active.classList.add('active');
     }
   });
-}, { threshold: 0.4 });
+}, { threshold: 0.3 });
 
 sections.forEach(s => sectionObserver.observe(s));
